@@ -1,0 +1,30 @@
+<! DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+</head>
+<body class="text-2xl bg-pink flex justify-center items-center">
+<div>
+        <select id="lists" onchange="send()">
+    <option value="default">Connect Now</option>
+     <option value="kichen_room_connect">Kichen Room</option>
+     <option value="bad_connect">Bad Room</option>
+  </select>
+    <h2 id="h2"></h2>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+function send(){
+  let socket =io();
+  const data =document.getElementById("lists").value;
+  socket.on(`${data}`, (smg)=>{
+  document.getElementById('h2').innerHTML=smg; 
+})
+}
+</script>
+</body>
+</html>
